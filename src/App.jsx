@@ -7,8 +7,13 @@ import { db } from "./data/db"
 
 function App() {
 
-    const [data, setData] = useState(db)
-    const[cart, setCart] = useState([])
+    const initialCart = () => {
+        const localStorageCart = localStorage.getItem('cart')
+        return localStorageCart ? JSON.parse(localStorageCart) : []
+    }
+
+    const [data] = useState(db)
+    const[cart, setCart] = useState(initialCart)
 
     const MAX_ITEMS = 5 //Limitar a 10 unidades por producto
     const MIN_ITEMS = 1 //Cantidad minima de un producto
